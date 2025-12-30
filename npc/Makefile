@@ -144,6 +144,5 @@ clean:
 	rm -rf ./obj_dir
 	rm -rf waveform.vcd
 	rm -rf waveform.fst
-	rm ./log
 
 .PHONY: default clean lint verilate build gdb run run-env waveform.vcd waves
