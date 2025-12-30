@@ -1,4 +1,4 @@
-STUID = ysyx_231220000
+STUID = ysyx_25080202
 STUNAME = Derek
 
 # DO NOT modify the following code!!!
@@ -21,3 +21,7 @@ submit:
 	STUID=$(STUID) STUNAME=$(STUNAME) bash -c "$$(curl -s http://why.ink:8080/static/submit.sh)"
 
 .PHONY: default submit
+
+
+
+
