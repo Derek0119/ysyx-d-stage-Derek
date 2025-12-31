@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"int64.c"
 	.option nopic
 	.text
@@ -595,5 +595,5 @@ __clzdi2:
 	addi	sp,sp,12
 	jr	ra
 	.size	__clzdi2, .-__clzdi2
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

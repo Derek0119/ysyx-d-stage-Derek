@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"ioe.c"
 	.option nopic
 	.text
@@ -35,7 +35,7 @@ __am_uart_config:
 	.string	"access nonexist register"
 	.align	2
 .LC2:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/ioe.c:24  \n"
+	.string	" @ /home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/ioe.c:24  \n"
 	.section	.text.fail,"ax",@progbits
 	.align	2
 	.type	fail, @function
@@ -136,5 +136,5 @@ lut:
 	.word	__am_input_config
 	.word	__am_input_keybrd
 	.zero	476
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

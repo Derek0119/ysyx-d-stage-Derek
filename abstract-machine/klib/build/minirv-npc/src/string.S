@@ -1,382 +1,270 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"string.c"
 	.option nopic
 	.text
-	.section	.rodata.strlen.str1.4,"aMS",@progbits,1
-	.align	2
-.LC0:
-	.string	"AM Panic: "
-	.align	2
-.LC1:
-	.string	"Not implemented"
-	.align	2
-.LC2:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:8  \n"
 	.section	.text.strlen,"ax",@progbits
 	.align	2
 	.globl	strlen
 	.hidden	strlen
 	.type	strlen, @function
 strlen:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L2:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L2
-	lla	s0,.LC1
-	li	a0,78
+	mv	a4,a0
+	beq	a0,zero,.L4
+	lbu	a5,0(a0)
+	li	a0,0
+	beq	a5,zero,.L5
 .L3:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L3
-	lla	s0,.LC2
-	li	a0,32
+	addi	a0,a0,1
+	add	a5,a4,a0
+	lbu	a5,0(a5)
+	bne	a5,zero,.L3
+	ret
 .L4:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L4
-	li	a0,1
-	call	halt
+	li	a0,0
+	ret
+.L5:
+	ret
 	.size	strlen, .-strlen
-	.section	.rodata.strcpy.str1.4,"aMS",@progbits,1
-	.align	2
-.LC3:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:12  \n"
 	.section	.text.strcpy,"ax",@progbits
 	.align	2
 	.globl	strcpy
 	.hidden	strcpy
 	.type	strcpy, @function
 strcpy:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
+	beq	a1,zero,.L9
+	lbu	a5,0(a1)
+	mv	a4,a0
+	beq	a5,zero,.L10
 .L11:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L11
-	lla	s0,.LC1
-	li	a0,78
-.L12:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L12
-	lla	s0,.LC3
-	li	a0,32
-.L13:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L13
-	li	a0,1
-	call	halt
+	sb	a5,0(a4)
+	lbu	a5,1(a1)
+	addi	a4,a4,1
+	addi	a1,a1,1
+	bne	a5,zero,.L11
+.L10:
+	sb	zero,0(a4)
+.L9:
+	ret
 	.size	strcpy, .-strcpy
-	.section	.rodata.strncpy.str1.4,"aMS",@progbits,1
-	.align	2
-.LC4:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:16  \n"
 	.section	.text.strncpy,"ax",@progbits
 	.align	2
 	.globl	strncpy
 	.hidden	strncpy
 	.type	strncpy, @function
 strncpy:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L19:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L19
-	lla	s0,.LC1
-	li	a0,78
-.L20:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L20
-	lla	s0,.LC4
-	li	a0,32
+	beq	a1,zero,.L19
+	beq	a2,zero,.L25
+	mv	a4,a0
+	li	a5,0
+	j	.L24
 .L21:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L21
-	li	a0,1
-	call	halt
+	sb	a3,0(a4)
+	addi	a5,a5,1
+	addi	a4,a4,1
+	beq	a2,a5,.L22
+.L24:
+	add	a3,a1,a5
+	lbu	a3,0(a3)
+	bne	a3,zero,.L21
+	sb	zero,0(a4)
+	beq	a2,a5,.L22
+.L19:
+	ret
+.L22:
+	add	a2,a0,a2
+	sb	zero,0(a2)
+.L28:
+	ret
+.L25:
+	mv	a2,a0
+	sb	zero,0(a2)
+	j	.L28
 	.size	strncpy, .-strncpy
-	.section	.rodata.strcat.str1.4,"aMS",@progbits,1
-	.align	2
-.LC5:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:20  \n"
 	.section	.text.strcat,"ax",@progbits
 	.align	2
 	.globl	strcat
 	.hidden	strcat
 	.type	strcat, @function
 strcat:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L27:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L27
-	lla	s0,.LC1
-	li	a0,78
-.L28:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L28
-	lla	s0,.LC5
-	li	a0,32
-.L29:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L29
-	li	a0,1
-	call	halt
+	lbu	a5,0(a0)
+	beq	a5,zero,.L34
+	mv	a5,a0
+.L31:
+	lbu	a4,1(a5)
+	addi	a5,a5,1
+	bne	a4,zero,.L31
+.L30:
+	lbu	a4,0(a1)
+	beq	a4,zero,.L32
+.L33:
+	sb	a4,0(a5)
+	lbu	a4,1(a1)
+	addi	a5,a5,1
+	addi	a1,a1,1
+	bne	a4,zero,.L33
+.L32:
+	sb	zero,0(a5)
+	ret
+.L34:
+	mv	a5,a0
+	j	.L30
 	.size	strcat, .-strcat
-	.section	.rodata.strcmp.str1.4,"aMS",@progbits,1
-	.align	2
-.LC6:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:24  \n"
 	.section	.text.strcmp,"ax",@progbits
 	.align	2
 	.globl	strcmp
 	.hidden	strcmp
 	.type	strcmp, @function
 strcmp:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L35:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L35
-	lla	s0,.LC1
-	li	a0,78
-.L36:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L36
-	lla	s0,.LC6
-	li	a0,32
-.L37:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L37
+	lbu	a4,0(a0)
+	li	a3,0
+	beq	a4,zero,.L42
+.L41:
+	add	a5,a1,a3
+	lbu	a5,0(a5)
+	beq	a5,zero,.L50
+	beq	a5,a4,.L51
+	sltu	a0,a5,a4
+	slli	a0,a0,1
+	addi	a0,a0,-1
+	ret
+.L51:
+	addi	a3,a3,1
+	add	a5,a0,a3
+	lbu	a4,0(a5)
+	bne	a4,zero,.L41
+	add	a1,a1,a3
+.L42:
+	lbu	a0,0(a1)
+	snez	a0,a0
+	neg	a0,a0
+	ret
+.L50:
 	li	a0,1
-	call	halt
+	ret
 	.size	strcmp, .-strcmp
-	.section	.rodata.strncmp.str1.4,"aMS",@progbits,1
-	.align	2
-.LC7:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:28  \n"
 	.section	.text.strncmp,"ax",@progbits
 	.align	2
 	.globl	strncmp
 	.hidden	strncmp
 	.type	strncmp, @function
 strncmp:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L43:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L43
-	lla	s0,.LC1
-	li	a0,78
-.L44:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L44
-	lla	s0,.LC7
-	li	a0,32
-.L45:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L45
+	beq	a2,zero,.L57
+	add	a2,a0,a2
+.L56:
+	lbu	a5,0(a0)
+	lbu	a4,0(a1)
+	bne	a5,zero,.L54
+	snez	a4,a4
+	neg	a0,a4
+	ret
+.L54:
+	beq	a4,zero,.L58
+	beq	a5,a4,.L61
+	sgtu	a0,a5,a4
+	slli	a0,a0,1
+	addi	a0,a0,-1
+	ret
+.L61:
+	addi	a0,a0,1
+	addi	a1,a1,1
+	bne	a2,a0,.L56
+.L57:
+	li	a0,0
+	ret
+.L58:
 	li	a0,1
-	call	halt
+	ret
 	.size	strncmp, .-strncmp
-	.section	.rodata.memset.str1.4,"aMS",@progbits,1
-	.align	2
-.LC8:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:32  \n"
 	.section	.text.memset,"ax",@progbits
 	.align	2
 	.globl	memset
 	.hidden	memset
 	.type	memset, @function
 memset:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L51:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L51
-	lla	s0,.LC1
-	li	a0,78
-.L52:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L52
-	lla	s0,.LC8
-	li	a0,32
-.L53:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L53
-	li	a0,1
-	call	halt
+	andi	a1,a1,0xff
+	add	a4,a0,a2
+	mv	a5,a0
+	beq	a2,zero,.L68
+.L64:
+	addi	a5,a5,1
+	sb	a1,-1(a5)
+	bne	a5,a4,.L64
+.L68:
+	ret
 	.size	memset, .-memset
-	.section	.rodata.memmove.str1.4,"aMS",@progbits,1
-	.align	2
-.LC9:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:36  \n"
 	.section	.text.memmove,"ax",@progbits
 	.align	2
 	.globl	memmove
 	.hidden	memmove
 	.type	memmove, @function
 memmove:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L59:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L59
-	lla	s0,.LC1
-	li	a0,78
-.L60:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L60
-	lla	s0,.LC9
-	li	a0,32
-.L61:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L61
-	li	a0,1
-	call	halt
+	bgeu	a0,a1,.L70
+	beq	a2,zero,.L71
+	add	a2,a0,a2
+	mv	a5,a0
+.L72:
+	lbu	a4,0(a1)
+	addi	a5,a5,1
+	addi	a1,a1,1
+	sb	a4,-1(a5)
+	bne	a5,a2,.L72
+	ret
+.L70:
+	addi	a4,a2,-1
+	add	a5,a0,a4
+	add	a1,a1,a4
+	beq	a2,zero,.L71
+	addi	a3,a0,-1
+.L73:
+	lbu	a4,0(a1)
+	addi	a5,a5,-1
+	addi	a1,a1,-1
+	sb	a4,1(a5)
+	bne	a3,a5,.L73
+.L71:
+	ret
 	.size	memmove, .-memmove
-	.section	.rodata.memcpy.str1.4,"aMS",@progbits,1
-	.align	2
-.LC10:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:40  \n"
 	.section	.text.memcpy,"ax",@progbits
 	.align	2
 	.globl	memcpy
 	.hidden	memcpy
 	.type	memcpy, @function
 memcpy:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L67:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L67
-	lla	s0,.LC1
-	li	a0,78
-.L68:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L68
-	lla	s0,.LC10
-	li	a0,32
-.L69:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L69
-	li	a0,1
-	call	halt
+	beq	a2,zero,.L83
+	add	a2,a0,a2
+	mv	a5,a0
+.L84:
+	lbu	a4,0(a1)
+	addi	a5,a5,1
+	addi	a1,a1,1
+	sb	a4,-1(a5)
+	bne	a5,a2,.L84
+.L83:
+	ret
 	.size	memcpy, .-memcpy
-	.section	.rodata.memcmp.str1.4,"aMS",@progbits,1
-	.align	2
-.LC11:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/string.c:44  \n"
 	.section	.text.memcmp,"ax",@progbits
 	.align	2
 	.globl	memcmp
 	.hidden	memcmp
 	.type	memcmp, @function
 memcmp:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
-.L75:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L75
-	lla	s0,.LC1
-	li	a0,78
-.L76:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L76
-	lla	s0,.LC11
-	li	a0,32
-.L77:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L77
-	li	a0,1
-	call	halt
+	beq	a2,zero,.L93
+	add	a2,a0,a2
+.L92:
+	lbu	a5,0(a0)
+	lbu	a4,0(a1)
+	beq	a5,a4,.L96
+	sltu	a0,a5,a4
+	neg	a0,a0
+	ori	a0,a0,1
+	ret
+.L96:
+	addi	a0,a0,1
+	addi	a1,a1,1
+	bne	a0,a2,.L92
+.L93:
+	li	a0,0
+	ret
 	.size	memcmp, .-memcmp
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

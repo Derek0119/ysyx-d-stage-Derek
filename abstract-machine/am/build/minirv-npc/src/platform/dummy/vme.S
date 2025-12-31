@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"vme.c"
 	.option nopic
 	.text
@@ -46,5 +46,5 @@ ucontext:
 	addi	sp,sp,8
 	jr	ra
 	.size	ucontext, .-ucontext
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

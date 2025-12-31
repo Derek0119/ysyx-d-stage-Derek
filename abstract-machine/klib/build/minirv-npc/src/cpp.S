@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"cpp.c"
 	.option nopic
 	.text
@@ -29,7 +29,7 @@ __cxa_guard_release:
 	.section	.rodata.__cxa_atexit.str1.4,"aMS",@progbits,1
 	.align	2
 .LC0:
-	.string	"/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/cpp.c"
+	.string	"/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/klib/src/cpp.c"
 	.align	2
 .LC1:
 	.string	"Assertion fail at %s:%d\n"
@@ -48,5 +48,5 @@ __cxa_atexit:
 	li	a0,1
 	call	halt
 	.size	__cxa_atexit, .-__cxa_atexit
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

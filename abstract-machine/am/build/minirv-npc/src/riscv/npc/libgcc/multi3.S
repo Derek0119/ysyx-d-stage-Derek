@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"multi3.c"
 	.option nopic
 	.text
@@ -41,7 +41,7 @@ __muldi3:
 	beq	a4,zero,.L4
 	mv	a1,a4
 #APP
-# 80 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/libgcc/multi3.c" 1
+# 80 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/libgcc/multi3.c" 1
 	call __mulsi3
 # 0 "" 2
 #NO_APP
@@ -52,7 +52,7 @@ __muldi3:
 	lw	a0,8(sp)
 	mv	a1,a4
 #APP
-# 83 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/libgcc/multi3.c" 1
+# 83 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/libgcc/multi3.c" 1
 	call __mulsi3
 # 0 "" 2
 #NO_APP
@@ -66,5 +66,5 @@ __muldi3:
 	addi	sp,sp,24
 	jr	ra
 	.size	__muldi3, .-__muldi3
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

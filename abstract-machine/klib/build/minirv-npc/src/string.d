@@ -1,3 +1,3 @@
-/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/build/minirv-npc/src/string.o: \
- /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/build/minirv-npc/src/string.S \
- /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h
+/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/klib/build/minirv-npc/src/string.o: \
+ /home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/klib/build/minirv-npc/src/string.S \
+ /home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h

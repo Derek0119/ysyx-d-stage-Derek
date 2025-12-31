@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"stdlib.c"
 	.option nopic
 	.text
@@ -87,48 +87,28 @@ atoi:
 .L10:
 	ret
 	.size	atoi, .-atoi
-	.section	.rodata.malloc.str1.4,"aMS",@progbits,1
-	.align	2
-.LC0:
-	.string	"AM Panic: "
-	.align	2
-.LC1:
-	.string	"Not implemented"
-	.align	2
-.LC2:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/klib/src/stdlib.c:37  \n"
 	.section	.text.malloc,"ax",@progbits
 	.align	2
 	.globl	malloc
 	.hidden	malloc
 	.type	malloc, @function
 malloc:
-	addi	sp,sp,-12
-	sw	s0,4(sp)
-	sw	ra,8(sp)
-	lla	s0,.LC0
-	li	a0,65
+	lla	a3,.LANCHOR1
+	lw	a4,0(a3)
+	lla	a5,heap
+	bne	a4,zero,.L14
+	lw	a4,0(a5)
+	sw	a4,0(a3)
 .L14:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L14
-	lla	s0,.LC1
-	li	a0,78
-.L15:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L15
-	lla	s0,.LC2
-	li	a0,32
+	lw	a2,4(a5)
+	add	a5,a0,a4
+	bltu	a2,a5,.L16
+	mv	a0,a4
+	sw	a5,0(a3)
+	ret
 .L16:
-	addi	s0,s0,1
-	call	putch
-	lbu	a0,0(s0)
-	bne	a0,zero,.L16
-	li	a0,1
-	call	halt
+	li	a0,0
+	ret
 	.size	malloc, .-malloc
 	.section	.text.free,"ax",@progbits
 	.align	2
@@ -138,6 +118,13 @@ malloc:
 free:
 	ret
 	.size	free, .-free
+	.section	.sbss.addr,"aw",@nobits
+	.align	2
+	.set	.LANCHOR1,. + 0
+	.type	addr, @object
+	.size	addr, 4
+addr:
+	.zero	4
 	.section	.sdata.next,"aw"
 	.align	2
 	.set	.LANCHOR0,. + 0
@@ -145,5 +132,5 @@ free:
 	.size	next, 4
 next:
 	.word	1
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

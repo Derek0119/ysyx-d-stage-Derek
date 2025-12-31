@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 #define concat_temp(x, y) x ## y
 #define concat(x, y) concat_temp(x, y)
 #define MAP(c, f) c(f)

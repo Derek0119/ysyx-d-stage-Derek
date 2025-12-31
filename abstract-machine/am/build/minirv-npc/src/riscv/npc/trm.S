@@ -1,31 +1,19 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"trm.c"
 	.option nopic
 	.text
-	.section	.text.init_uart,"ax",@progbits
-	.align	2
-	.globl	init_uart
-	.hidden	init_uart
-	.type	init_uart, @function
-init_uart:
-	li	a5,268435456
-	li	a4,-128
-	sb	a4,3(a5)
-	sb	zero,1(a5)
-	li	a4,8
-	sb	a4,0(a5)
-	li	a4,7
-	sb	a4,3(a5)
-	ret
-	.size	init_uart, .-init_uart
 	.section	.text.putch,"ax",@progbits
 	.align	2
 	.globl	putch
 	.hidden	putch
 	.type	putch, @function
 putch:
-	li	a5,-1610612736
-	sb	a0,1016(a5)
+	li	a4,268435456
+.L2:
+	lbu	a5,5(a4)
+	andi	a5,a5,32
+	beq	a5,zero,.L2
+	sb	a0,0(a4)
 	ret
 	.size	putch, .-putch
 	.section	.text.halt,"ax",@progbits
@@ -35,13 +23,29 @@ putch:
 	.type	halt, @function
 halt:
 #APP
-# 42 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/trm.c" 1
+# 22 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/trm.c" 1
 	mv a0, a0; ebreak
 # 0 "" 2
 #NO_APP
-.L5:
-	j	.L5
+.L7:
+	j	.L7
 	.size	halt, .-halt
+	.section	.text.uart_init,"ax",@progbits
+	.align	2
+	.globl	uart_init
+	.hidden	uart_init
+	.type	uart_init, @function
+uart_init:
+	li	a5,268435456
+	li	a4,-125
+	sb	a4,3(a5)
+	sb	zero,1(a5)
+	li	a4,2
+	sb	a4,0(a5)
+	li	a4,3
+	sb	a4,3(a5)
+	ret
+	.size	uart_init, .-uart_init
 	.section	.text._trm_init,"ax",@progbits
 	.align	2
 	.globl	_trm_init
@@ -53,12 +57,12 @@ _trm_init:
 	sw	ra,8(sp)
 	call	main
 #APP
-# 42 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/trm.c" 1
+# 22 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/trm.c" 1
 	mv a0, a0; ebreak
 # 0 "" 2
 #NO_APP
-.L7:
-	j	.L7
+.L10:
+	j	.L10
 	.size	_trm_init, .-_trm_init
 	.hidden	heap
 	.globl	heap
@@ -77,5 +81,5 @@ mainargs:
 heap:
 	.word	_heap_start
 	.word	_pmem_start+134217728
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

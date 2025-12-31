@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"timer.c"
 	.option nopic
 	.text
@@ -16,11 +16,20 @@ __am_timer_init:
 	.hidden	__am_timer_uptime
 	.type	__am_timer_uptime, @function
 __am_timer_uptime:
-	li	a5,-1610612736
-	lw	a4,76(a5)
-	lw	a5,72(a5)
-	sw	a4,4(a0)
+#APP
+# 22 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/timer.c" 1
+	csrr a4, 2944
+# 0 "" 2
+# 23 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/timer.c" 1
+	csrr a5, 2816
+# 0 "" 2
+#NO_APP
+	slli	a3,a4,31
+	srli	a5,a5,1
+	or	a5,a5,a3
+	srli	a4,a4,1
 	sw	a5,0(a0)
+	sw	a4,4(a0)
 	ret
 	.size	__am_timer_uptime, .-__am_timer_uptime
 	.section	.text.__am_timer_rtc,"ax",@progbits
@@ -38,5 +47,5 @@ __am_timer_rtc:
 	sw	a5,0(a0)
 	ret
 	.size	__am_timer_rtc, .-__am_timer_rtc
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

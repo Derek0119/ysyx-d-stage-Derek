@@ -1,11 +1,11 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"cte.c"
 	.option nopic
 	.text
 	.section	.rodata.__am_irq_handle.str1.4,"aMS",@progbits,1
 	.align	2
 .LC0:
-	.string	"/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/cte.c"
+	.string	"/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/cte.c"
 	.align	2
 .LC1:
 	.string	"Assertion fail at %s:%d\n"
@@ -50,7 +50,7 @@ cte_init:
 	mv	a5,a0
 	lla	a4,__am_asm_trap
 #APP
-# 25 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/cte.c" 1
+# 25 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/cte.c" 1
 	csrw mtvec, a4
 # 0 "" 2
 #NO_APP
@@ -76,7 +76,7 @@ kcontext:
 	.type	yield, @function
 yield:
 #APP
-# 39 "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/cte.c" 1
+# 39 "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/cte.c" 1
 	li a5, -1; ecall
 # 0 "" 2
 #NO_APP
@@ -106,5 +106,5 @@ iset:
 	.size	user_handler, 4
 user_handler:
 	.zero	4
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits

@@ -1,4 +1,4 @@
-#include "/home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/tools/minirv/inst-replace.h"
+#include "/home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/tools/minirv/inst-replace.h"
 	.file	"unused.c"
 	.option nopic
 	.text
@@ -11,7 +11,7 @@
 	.string	"Not implement"
 	.align	2
 .LC2:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/libgcc/unused.c:4  \n"
+	.string	" @ /home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/libgcc/unused.c:4  \n"
 	.section	.text.__muldf3,"ax",@progbits
 	.align	2
 	.globl	__muldf3
@@ -48,7 +48,7 @@ __muldf3:
 	.section	.rodata.__fixdfdi.str1.4,"aMS",@progbits,1
 	.align	2
 .LC3:
-	.string	" @ /home/derek/D-stage-ci/workbench/ics2025~v/abstract-machine/am/src/riscv/npc/libgcc/unused.c:5  \n"
+	.string	" @ /home/zjt/npc-test-ci/ysyx-workbench/abstract-machine/am/src/riscv/npc/libgcc/unused.c:5  \n"
 	.section	.text.__fixdfdi,"ax",@progbits
 	.align	2
 	.globl	__fixdfdi
@@ -82,5 +82,5 @@ __fixdfdi:
 	li	a0,1
 	call	halt
 	.size	__fixdfdi, .-__fixdfdi
-	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0"
+	.ident	"GCC: (Ubuntu 11.2.0-16ubuntu1) 11.2.0"
 	.section	.note.GNU-stack,"",@progbits
