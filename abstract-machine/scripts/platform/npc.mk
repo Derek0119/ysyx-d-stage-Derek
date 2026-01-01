@@ -52,9 +52,7 @@ image: $(IMAGE_BIN)
 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
 
 run: insert-arg
-	$(MAKE) -C $(NPC_HOME) clean-trace
-	$(MAKE) -C $(NPC_HOME) clean
-	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) run IMG=$(IMG) ELF=$(ELF)
+	$(MAKE) -C $(YSYX_HOME)npc run IMG=$(IMG)
 # 	$(info [DEBUG] IMG = $(IMG))
 
 .PHONY: insert-arg run
