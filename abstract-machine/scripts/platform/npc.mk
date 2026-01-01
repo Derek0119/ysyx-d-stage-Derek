@@ -57,4 +57,4 @@ run: insert-arg
 	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) run IMG=$(IMG) ELF=$(ELF)
 # 	$(info [DEBUG] IMG = $(IMG))
 
-.PHONY: insert-arg
+.PHONY: insert-arg run
