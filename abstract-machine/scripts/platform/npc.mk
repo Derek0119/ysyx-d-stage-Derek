@@ -51,6 +51,11 @@ $(IMAGE_BIN): $(IMAGE).elf $(HELLO_TEMPLATE)
 image: $(IMAGE_BIN)
 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
 
+# run: insert-arg
+#     $(MAKE) -C $(YSYX_HOME)/npc ISA=$(ISA) run IMG=$(IMAGE_BIN)
+
+# .PHONY: insert-arg run
+
 run: insert-arg
 	$(MAKE) -C $(YSYX_HOME)/npc ISA=$(ISA) run IMG=$(IMAGE_BIN)
 
