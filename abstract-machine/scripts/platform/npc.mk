@@ -12,9 +12,9 @@ CFLAGS    += -fdata-sections -ffunction-sections
 LDSCRIPTS += $(AM_HOME)/scripts/linker.ld
 LDFLAGS   += --defsym=_pmem_start=0x80000000 --defsym=_entry_offset=0x0
 LDFLAGS   += --gc-sections -e _start
+
 IMG := $(abspath $(IMAGE).bin)
 ELF := $(abspath $(IMAGE).elf)
-# LOAD_ADDR ?= 0x30000000
 
 MAINARGS_MAX_LEN = 64
 MAINARGS_PLACEHOLDER = h
@@ -25,12 +25,18 @@ insert-arg: image
 	@python $(AM_HOME)/tools/insert-arg.py $(IMAGE).bin $(MAINARGS_MAX_LEN) $(MAINARGS_PLACEHOLDER) "$(mainargs)"
 
 
+# image: image-dep
+# 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
+# 	@echo + OBJCOPY "->" $(IMAGE_REL).bin
+# 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
+# # 	@$(OBJCOPY) -I binary -O verilog --adjust-vma=$(LOAD_ADDR) $(IMAGE).bin $(IMAGE).hex
 
 ELF_OFFSET := 370432
 
 # 源模板文件（对应你 gen.sh 里的 HELLO_BIN）
 HELLO_TEMPLATE := $(YSYX_HOME)/ysyxSoC/ready-to-run/D-stage/hello-minirv-ysyxsoc.bin
 
+# HELLO_TEMPLATE := /home/derek/下载/ysyx-workbench/ysyxSoC/ready-to-run/D-stage/hello-minirv-ysyxsoc.bin
 # 最终要生成的 bin
 IMAGE_BIN := $(IMAGE).bin
 
@@ -43,21 +49,13 @@ $(IMAGE_BIN): $(IMAGE).elf $(HELLO_TEMPLATE)
 
 # 如果你还想保留反汇编，可以保留原来的 image 目标
 image: $(IMAGE_BIN)
-	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).tx
-
-
-
-# image: image-dep
-# 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
-# 	@echo + OBJCOPY "->" $(IMAGE_REL).bin
-# 	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin
-# # 	@$(OBJCOPY) -I binary -O verilog --adjust-vma=$(LOAD_ADDR) $(IMAGE).bin $(IMAGE).hex
-
+	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
 
 run: insert-arg
-	$(MAKE) -C $(NPC_HOME) clean-trace
+	echo "TODO: add command here to run simulation"
+    $(MAKE) -C $(NPC_HOME) clean-trace
 	$(MAKE) -C $(NPC_HOME) clean
 	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) run IMG=$(IMG) ELF=$(ELF)
-	$(info [DEBUG] IMG = $(IMG))
+# 	$(info [DEBUG] IMG = $(IMG))
 
 .PHONY: insert-arg
