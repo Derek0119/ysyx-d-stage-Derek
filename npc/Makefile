@@ -44,7 +44,7 @@ run: sim
  
 clean:
 	rm -rf obj_dir
-	rm waveform.vcd
+# 	rm waveform.vcd
  
  
  
