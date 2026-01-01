@@ -37,11 +37,11 @@ sim:
 run: sim
 	$(EX_CMD) $(ARGS) $(IMG)
 	#rm -rf obj_dir
-	#rm waveform.vcd
+# 	#rm waveform.vcd
  
 clean:
 	rm -rf obj_dir
-	rm waveform.vcd
+# 	rm waveform.vcd
  
  
  
