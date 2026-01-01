@@ -12,7 +12,8 @@ CFLAGS    += -fdata-sections -ffunction-sections
 LDSCRIPTS += $(AM_HOME)/scripts/linker.ld
 LDFLAGS   += --defsym=_pmem_start=0x80000000 --defsym=_entry_offset=0x0
 LDFLAGS   += --gc-sections -e _start
-
+IMG := $(abspath $(IMAGE).bin)
+ELF := $(abspath $(IMAGE).elf)
 # LOAD_ADDR ?= 0x30000000
 
 MAINARGS_MAX_LEN = 64
@@ -54,6 +55,9 @@ image: $(IMAGE_BIN)
 
 
 run: insert-arg
-	echo "TODO: add command here to run simulation"
+	$(MAKE) -C $(NPC_HOME) clean-trace
+	$(MAKE) -C $(NPC_HOME) clean
+	$(MAKE) -C $(NPC_HOME) ISA=$(ISA) run IMG=$(IMG) ELF=$(ELF)
+	$(info [DEBUG] IMG = $(IMG))
 
 .PHONY: insert-arg
