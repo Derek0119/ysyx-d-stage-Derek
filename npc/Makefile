@@ -3,10 +3,10 @@ all:
 WORK_DIR  = $(shell pwd)
 VSRCS = $(shell find $(./vsrc ) -name "*.v" -or -name "*.sv")
 VSRCS += $(shell find ../patch/ysyxSoC/perip -name "*.v")
-VSRCS += ../patch/ysyxSoC/ready-to-run/D-stage/ysyxSoCFull.v
-# CSRCS = $(shell find $(./csrc ) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
-# INC_PATH += $(WORK_DIR)/csrc/include
-# INCFLAGS += $(addprefix -I, $(INC_PATH))
+VSRCS += ../ysyxSoC/ready-to-run/D-stage/ysyxSoCFull.v
+CSRCS = $(shell find $(./csrc ) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+INC_PATH += $(WORK_DIR)/csrc/include
+INCFLAGS += $(addprefix -I, $(INC_PATH))
 
 INC_PATH_VER += ../patch/ysyxSoC/perip/uart16550/rtl ../patch/ysyxSoC/perip/spi/rtl
 INCFLAGS_VER += $(foreach v,$(INC_PATH_VER),-I$(v))
@@ -29,18 +29,15 @@ sim:
 	@echo $(VSRCS)
 	verilator --trace --cc --exe --build --autoflush $(INCFLAGS_VER) --timescale "1ns/1ns" --no-timing --Wno-WIDTHEXPAND\
     --top-module $(TOP_NAME) \
-    $(VSRCS) \
+    $(CSRCS) $(VSRCS) \
 	$(LIB) $(FLAGS)
-
- IMG ?= IMG ?= ../patch/ysyxSoC/ready-to-run/D-stage/new.bin
-# 	 IMG ?= /home/derek/D-stage-ci/workbench/flag/ysyx-workbench/ysyxSoC/ready-to-run/D-stage/hello-minirv-ysyxsoc.bin
-#  IMG ?= /home/derek/D-stage-ci/workbench/flag/ysyx-workbench/ysyxSoC/ready-to-run/D-stage/hello-minirv-ysyxsoc.bin
-#  IMG ?= /home/derek/D-stage-ci/workbench/flag/ysyx-workbench/riscv-arch-test-am/build/add-01-riscv32e-npc.bin
+ 
+ IMG ?= ../patch/ysyxSoC/ready-to-run/D-stage/new.bin
 
 run: sim
 	$(EX_CMD) $(ARGS) $(IMG)
 	#rm -rf obj_dir
-	#rm waveform.vcd
+# 	#rm waveform.vcd
  
 clean:
 	rm -rf obj_dir
@@ -49,12 +46,6 @@ clean:
  
  
 include ../Makefile
-
-
-
-
-
-
 
 
 
