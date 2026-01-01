@@ -52,8 +52,6 @@ image: $(IMAGE_BIN)
 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
 
 run: insert-arg
-IMAGE_BIN := $(IMAGE).bin
 	$(MAKE) -C $(YSYX_HOME)/npc run IMG=$(IMAGE_BIN)
-# 	$(info [DEBUG] IMG = $(IMG))
 
 .PHONY: insert-arg run
